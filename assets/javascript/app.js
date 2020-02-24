@@ -60,12 +60,11 @@ function populateQuestion() {
   $(".question").html(currentQuestion.question);
   currentQuestion.randomize();
 
-  $("#A1")
-    .find(".pa")
-    .text(currentQuestion.possibleAnswers[0]);
-  $("#A2")
-    .find(".pa")
-    .text(currentQuestion.possibleAnswers[1]);
+  for (var index = 0; index < 4; index++) {
+    $(`#A${index + 1}`)
+      .find(".pa")
+      .text(currentQuestion.possibleAnswers[index]);
+  }
 }
 
 // Timer Logic
