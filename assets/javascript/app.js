@@ -98,7 +98,6 @@ function incorrect(selected) {
   }
   gameBoard.wrongAnswers++;
 }
-
 function checkAnswer(selected) {
   if (currentQuestion.correctAnswer === selected.find(".pa").text()) {
     correct(selected);
@@ -106,7 +105,6 @@ function checkAnswer(selected) {
     incorrect(selected);
   }
 }
-
 function outOfTime() {
   $(".feedback").show();
   $(".outcome").html(
@@ -133,7 +131,6 @@ function outOfTime() {
 function stop() {
   clearInterval(intervalID);
 }
-
 function decrease() {
   qClock--;
   $("#time-remaining").text(qClock + " seconds");
@@ -166,6 +163,12 @@ function startGame() {
   startTimer();
 }
 
+function nextQuestion() {
+  console.log("Starting next question");
+  qClock = 20;
+  $(".feedback").hide();
+  populateQuestion();
+}
 function randomizeGame() {}
 
 $(window).on("load", function() {
@@ -181,6 +184,6 @@ $(window).on("load", function() {
           .text()
     );
     checkAnswer($(this));
+    setTimeout(nextQuestion(), 5000);
   });
-  randomizeGame();
 });
