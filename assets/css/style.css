@@ -49,11 +49,20 @@ p {
   color: gray;
   margin-bottom: 25px;
 }
+
+/* Timer Section */
+.timer {
+  display: none;
+}
 /* Feedback Section */
 .feedback {
   display: none;
 }
 /* Question Section */
+.question-container {
+  display: none;
+}
+
 .answers {
   margin-left: 25px;
 }
