@@ -58,6 +58,7 @@ p {
   margin-left: 25px;
 }
 
+/* Got blinking cursor from here https://codepen.io/ArtemGordinsky/pen/GnLBq */
 .blinking-cursor {
   visibility: hidden;
   color: white;
