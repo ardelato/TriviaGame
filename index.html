@@ -12,9 +12,6 @@
     <script src="assets/javascript/app.js"></script>
   </head>
   <body>
-    <!-- Make the the Theme Programming Trivia questiosn about things we've learned -->
-    <!-- Start Button -->
-    <!-- Time Remaining Section -->
     <!-- Feedback Section (Out of Time, Correct, Wrong Answer) -->
     <!-- Image Tag of correct answer  -->
     <!-- Out of time - "Out of Time!" -->
@@ -37,6 +34,7 @@
       </div>
 
       <div class="gameContent">
+        <!-- Starting Instructions -->
         <div class="comment" id="instructions">
           <p>
             /* Programming Trivia Game<br />
@@ -50,6 +48,49 @@
             &nbsp*/
           </p>
         </div>
+
+        <!-- Timer Section -->
+        <div class="timer code">
+          Time Remaing:
+          <span class="alt-code" id="time-remaining">10 seconds</span>
+        </div>
+
+        <!-- Post Answer Section -->
+        <div class="feedback">
+          <p class="outcome"></p>
+          <img src="" alt="" id="img-answer" />
+        </div>
+
+        <!-- Question Section -->
+        <div class="question-container code">
+          <div class="question">
+            <p>
+              <span class="alt-code-blue" id="question-label">Question: </span>
+              <span class="alt-code">&lt;a&gt;</span> and
+              <span class="alt-code">&lt;/a&gt;</span> are the tags used for?
+            </p>
+          </div>
+          <div class="answers">
+            <p class="possible-answer" id="A1">
+              A) <span class="pa">Adding links to your page</span>
+              <span class="blinking-cursor">|</span>
+            </p>
+            <p class="possible-answer" id="A2">
+              B) <span class="pa">Aligning Text</span>
+              <span class="blinking-cursor">|</span>
+            </p>
+            <p class="possible-answer" id="A3">
+              C) <span class="pa">Adding images</span>
+              <span class="blinking-cursor">|</span>
+            </p>
+            <p class="possible-answer" id="A4">
+              D) <span class="pa">Adding audio</span>
+              <span class="blinking-cursor">|</span>
+            </p>
+          </>
+        </div>
+
+        <!-- Bottom of "IDE" Section -->
         <div class="footer-tabs">
           <div class="start">
             <img
