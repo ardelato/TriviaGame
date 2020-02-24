@@ -5,3 +5,8 @@ html {
   -o-background-size: cover;
   background-size: cover;
 }
+
+p {
+  font-family: monoidregular, Arial, sans-serif;
+  color: white;
+}
