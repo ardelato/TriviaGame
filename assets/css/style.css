@@ -129,11 +129,16 @@ p {
 }
 
 .possible-answer {
+  padding-left: 10px;
   cursor: text;
 }
 .possible-answer:hover {
   color: rgb(231, 131, 162);
 }
+.possible-answer:active {
+  color: cornflowerblue;
+}
+
 .possible-answer:hover .blinking-cursor {
   visibility: visible;
 }

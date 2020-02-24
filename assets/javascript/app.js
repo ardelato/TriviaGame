@@ -1,5 +1,6 @@
 var intervalID;
-var qClock = 2;
+var qClock = 20;
+var feedbackClock = 5;
 
 var tempQuestions = [];
 var currentQuestion;
@@ -65,12 +66,55 @@ function populateQuestion() {
       .text(currentQuestion.possibleAnswers[index]);
   }
 }
+
+function correct(selected) {
+  $(".feedback").show();
+  $(".outcome").html("Correct!");
+  $(".outcome").css({ color: "#809A00" });
+  selected.css({
+    "background-color": "#809A00"
+  });
+  gameBoard.correctAnswers++;
+}
+function incorrect(selected) {
+  $(".feedback").show();
+  $(".outcome").html("Incorrect!");
+  $(".outcome").css({ color: "#df4b68" });
+  selected.css({
+    "background-color": "#df4b68"
+  });
+
+  for (var index = 0; index < 4; index++) {
+    if (
+      currentQuestion.correctAnswer ===
+      $(`#A${index + 1}`)
+        .find(".pa")
+        .text()
+    ) {
+      $(`#A${index + 1}`).css({
+        "background-color": "#809A00"
+      });
+    }
+  }
+  gameBoard.wrongAnswers++;
+}
+
+function checkAnswer(selected) {
+  if (currentQuestion.correctAnswer === selected.find(".pa").text()) {
+    correct(selected);
+  } else {
+    incorrect(selected);
+  }
+}
+
 function outOfTime() {
   $(".feedback").show();
   $(".outcome").html(
     "Sorry! You ran out of time! <br> The correct answer was: " +
       currentQuestion.correctAnswer
   );
+  $(".outcome").css("color", "#df4b68");
+  gameBoard.unanswered++;
   for (var index = 0; index < 4; index++) {
     if (
       currentQuestion.correctAnswer ===
@@ -127,6 +171,16 @@ function randomizeGame() {}
 $(window).on("load", function() {
   $(".start").on("click", function() {
     startGame();
+  });
+  $(".possible-answer").on("click", function() {
+    stop();
+    console.log(
+      "Selected Answer: " +
+        $(this)
+          .find(".pa")
+          .text()
+    );
+    checkAnswer($(this));
   });
   randomizeGame();
 });
