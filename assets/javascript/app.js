@@ -1,12 +1,12 @@
 var intervalID;
-var qClock = 10;
+var qClock = 2;
 
 var tempQuestions = [];
 var currentQuestion;
 
 var q1 = {
   question:
-    "<span class='alt-code-blue' id='question-label'>Question: </span><span class='alt-code'>&lt;a&gt;</span> and<span class='alt-code'>&lt;/a&gt;</span> are the tags used for?",
+    "<span class='alt-code-blue' id='question-label'>Question: </span><span class='alt-code'>&lt;a&gt;</span> and <span class='alt-code'>&lt;/a&gt;</span> are the tags used for?",
   correctAnswer: "Adding links to your page",
   possibleAnswers: [
     "Adding links to your page",
@@ -53,7 +53,6 @@ function getRandomQuestion() {
   );
   return Object.assign({}, q.pop());
 }
-
 function populateQuestion() {
   currentQuestion = getRandomQuestion();
   console.log(currentQuestion);
@@ -66,17 +65,38 @@ function populateQuestion() {
       .text(currentQuestion.possibleAnswers[index]);
   }
 }
+function outOfTime() {
+  $(".feedback").show();
+  $(".outcome").html(
+    "Sorry! You ran out of time! <br> The correct answer was: " +
+      currentQuestion.correctAnswer
+  );
+  for (var index = 0; index < 4; index++) {
+    if (
+      currentQuestion.correctAnswer ===
+      $(`#A${index + 1}`)
+        .find(".pa")
+        .text()
+    ) {
+      $(`#A${index + 1}`).css({
+        "background-color": "#809A00"
+      });
+    }
+  }
+}
 
 // Timer Logic
 function stop() {
   clearInterval(intervalID);
 }
+
 function decrease() {
   qClock--;
   $("#time-remaining").text(qClock + " seconds");
   if (qClock === 0) {
     stop();
     console.log("Time's Up!");
+    outOfTime();
   }
 }
 function startTimer() {

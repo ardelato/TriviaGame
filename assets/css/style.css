@@ -187,3 +187,8 @@ p {
   color: rgb(108, 158, 248);
   font-weight: bold;
 }
+
+.alt-code-red {
+  color: #df4b68;
+  font-weight: bold;
+}
