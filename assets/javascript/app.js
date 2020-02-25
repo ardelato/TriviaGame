@@ -40,11 +40,71 @@ var q2 = {
   }
 };
 
+var q3 = {
+  question:
+    "<span class='alt-code-blue' id='question-label'>Question: </span>Which of the following is a bulletted list?",
+  correctAnswer: "<ul>",
+  possibleAnswers: ["<ul>", "<li>", "<bl>", "<ol>"],
+  randomize: function() {
+    this.possibleAnswers.sort(function(a, b) {
+      return 0.5 - Math.random();
+    });
+  }
+};
+
+var q4 = {
+  question:
+    "<span class='alt-code-blue' id='question-label'>Question: </span>What does the following mean to the computer? <span class='alt-code'>div p </span> <span class='alt-code-green'>{</span> <span class='alt-code-red'>color: #ff0000;</span><span class='alt-code-green'>}</span>",
+  correctAnswer:
+    "Make the text inside any paragraph that is inside any div be bright red",
+  possibleAnswers: [
+    "Make text in all divs and all paragraphs in this document be bright red",
+    "Make the background in all divs that are of the class 'p' be bright red",
+    "Make the text inside any divs inside of any paragraph be bright red",
+    "Make the text inside any paragraph that is inside any div be bright red"
+  ],
+  randomize: function() {
+    this.possibleAnswers.sort(function(a, b) {
+      return 0.5 - Math.random();
+    });
+  }
+};
+
+var q5 = {
+  question:
+    "<span class='alt-code-blue' id='question-label'>Question: </span>What are the main differences between ID and Class?",
+  correctAnswer:
+    "ID's are supposed to be only used once per page but Classes can be used multiple times per page, and one element can have more than one Class but should have only one ID",
+  possibleAnswers: [
+    "Classes are for use with spans and ID's are for use with DIVs",
+    "ID's are supposed to be only used once per page but Classes can be used multiple times per page, and one element can have more than one Class but should have only one ID",
+    "Classes should be used only once per page, but ID's can be used as many times as you like on one page",
+    "ID's are better than Classes"
+  ],
+  randomize: function() {
+    this.possibleAnswers.sort(function(a, b) {
+      return 0.5 - Math.random();
+    });
+  }
+};
+
+var q5 = {
+  question:
+    "<span class='alt-code-blue' id='question-label'>Question: </span>Take choice from user either yes and no or cancel we use ________",
+  correctAnswer: "Alertbox",
+  possibleAnswers: ["Promptbox", "Confirmbox", "Alertbox", "None of these"],
+  randomize: function() {
+    this.possibleAnswers.sort(function(a, b) {
+      return 0.5 - Math.random();
+    });
+  }
+};
+
 var gameBoard = {
   correctAnswers: 0,
   wrongAnswers: 0,
   unanswered: 0,
-  questions: [q1, q2]
+  questions: [q1, q2, q3, q4, q5]
 };
 
 function resetGameBoard() {
@@ -96,7 +156,6 @@ function populateQuestion() {
       .text(currentQuestion.possibleAnswers[index]);
   }
 }
-
 function correct(selected) {
   $(".feedback").show();
   $(".outcome").html("Correct!");
@@ -137,10 +196,7 @@ function checkAnswer(selected) {
 }
 function outOfTime() {
   $(".feedback").show();
-  $(".outcome").html(
-    "Sorry! You ran out of time! <br> The correct answer was: " +
-      currentQuestion.correctAnswer
-  );
+  $(".outcome").html("Sorry! You ran out of time!");
   $(".outcome").css("color", "#df4b68");
   gameBoard.unanswered++;
   for (var index = 0; index < 4; index++) {
