@@ -88,11 +88,22 @@ var q5 = {
   }
 };
 
-var q5 = {
+var q6 = {
   question:
     "<span class='alt-code-blue' id='question-label'>Question: </span>Take choice from user either yes and no or cancel we use ________",
   correctAnswer: "Alertbox",
   possibleAnswers: ["Promptbox", "Confirmbox", "Alertbox", "None of these"],
+  randomize: function() {
+    this.possibleAnswers.sort(function(a, b) {
+      return 0.5 - Math.random();
+    });
+  }
+};
+var q7 = {
+  question:
+    "<span class='alt-code-blue' id='question-label'>Question: </span>How can we declare variables in Javascript",
+  correctAnswer: "var",
+  possibleAnswers: ["var", "int", "float", "set"],
   randomize: function() {
     this.possibleAnswers.sort(function(a, b) {
       return 0.5 - Math.random();
@@ -104,7 +115,7 @@ var gameBoard = {
   correctAnswers: 0,
   wrongAnswers: 0,
   unanswered: 0,
-  questions: [q1, q2, q3, q4, q5]
+  questions: [q1, q2, q3, q4, q5, q6, q7]
 };
 
 function resetGameBoard() {
