@@ -149,6 +149,9 @@ function outOfTime() {
       });
     }
   }
+  setTimeout(function() {
+    nextQuestion();
+  }, feedbackClock * 1000);
 }
 
 // Timer Logic
@@ -219,7 +222,7 @@ $(window).on("load", function() {
     console.log("Getting Ready for Time out");
     setTimeout(function() {
       nextQuestion();
-    }, 5000);
+    }, feedbackClock * 1000);
     console.log("Finished Timeout");
   });
 });
