@@ -46,6 +46,30 @@ var gameBoard = {
   questions: [q1, q2]
 };
 
+function resetGameBoard() {
+  gameBoard.correctAnswers = 0;
+  gameBoard.wrongAnswers = 0;
+  gameBoard.unanswered = 0;
+}
+function results() {
+  var htmlString =
+    "<p>/* Programming Trivia Game<br />&nbsp*<br >&nbsp* Below are your results<br />&nbsp&*<br >&nbsp* If you want to play again click start!<br />&nbsp*/</p>";
+  $(".comment").html(htmlString);
+  $(".timer").hide();
+  $(".question-container").hide();
+  var outcomeString =
+    "<span class='alt-code'>Correct Answers: </span>" +
+    gameBoard.correctAnswers +
+    "<br><br>" +
+    "<span class='alt-code'>Incorrect Answers: </span>" +
+    gameBoard.wrongAnswers +
+    "<br><br>" +
+    "<span class='alt-code'>Unasnwered: </span>" +
+    gameBoard.unanswered +
+    "<br><br>";
+  $(".outcome").html(outcomeString);
+  $(".start").show();
+}
 //Question Logic
 function getRandomQuestion() {
   var q = tempQuestions.splice(
@@ -149,7 +173,7 @@ function startTimer() {
 function startGame() {
   console.log("Starting Game");
   $(".start").hide();
-
+  resetGameBoard();
   var htmlString =
     "<p>/* Programming Trivia Game<br />&nbsp*<br >&nbsp* Cick on the correct question<br />&nbsp*/</p>";
   $(".comment").html(htmlString);
@@ -165,9 +189,17 @@ function startGame() {
 
 function nextQuestion() {
   console.log("Starting next question");
-  qClock = 20;
-  $(".feedback").hide();
-  populateQuestion();
+  if (tempQuestions.length === 0) {
+    results();
+  } else {
+    qClock = 20;
+    $(".feedback").hide();
+    for (var index = 0; index < 4; index++) {
+      $(`#A${index + 1}`).css({ "background-color": "" });
+    }
+    startTimer();
+    populateQuestion();
+  }
 }
 function randomizeGame() {}
 
@@ -184,6 +216,10 @@ $(window).on("load", function() {
           .text()
     );
     checkAnswer($(this));
-    setTimeout(nextQuestion(), 5000);
+    console.log("Getting Ready for Time out");
+    setTimeout(function() {
+      nextQuestion();
+    }, 5000);
+    console.log("Finished Timeout");
   });
 });
