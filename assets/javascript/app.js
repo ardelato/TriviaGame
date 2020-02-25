@@ -1,5 +1,5 @@
 var intervalID;
-var qClock = 20;
+var qClock = 3;
 var feedbackClock = 5;
 
 var tempQuestions = [];
@@ -64,10 +64,11 @@ function results() {
     "<span class='alt-code'>Incorrect Answers: </span>" +
     gameBoard.wrongAnswers +
     "<br><br>" +
-    "<span class='alt-code'>Unasnwered: </span>" +
+    "<span class='alt-code'>Unanswered: </span>" +
     gameBoard.unanswered +
     "<br><br>";
   $(".outcome").html(outcomeString);
+  $(".outcome").css("color", "rgb(212, 213, 214)");
   $(".start").show();
 }
 //Question Logic
