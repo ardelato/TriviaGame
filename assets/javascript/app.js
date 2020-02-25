@@ -1,6 +1,7 @@
 var intervalID;
-var qClock = 3;
+var qClock = 20;
 var feedbackClock = 5;
+var questionSelected = false;
 
 var tempQuestions = [];
 var currentQuestion;
@@ -50,10 +51,14 @@ function resetGameBoard() {
   gameBoard.correctAnswers = 0;
   gameBoard.wrongAnswers = 0;
   gameBoard.unanswered = 0;
+  qClock = 20;
+  for (var index = 0; index < 4; index++) {
+    $(`#A${index + 1}`).css({ "background-color": "" });
+  }
 }
 function results() {
   var htmlString =
-    "<p>/* Programming Trivia Game<br />&nbsp*<br >&nbsp* Below are your results<br />&nbsp&*<br >&nbsp* If you want to play again click start!<br />&nbsp*/</p>";
+    "<p>/* Programming Trivia Game<br />&nbsp*<br >&nbsp* Below are your results<br />&nbsp*<br >&nbsp* If you want to play again click start!<br />&nbsp*/</p>";
   $(".comment").html(htmlString);
   $(".timer").hide();
   $(".question-container").hide();
@@ -177,6 +182,7 @@ function startTimer() {
 function startGame() {
   console.log("Starting Game");
   $(".start").hide();
+  $(".feedback").hide();
   resetGameBoard();
   var htmlString =
     "<p>/* Programming Trivia Game<br />&nbsp*<br >&nbsp* Cick on the correct question<br />&nbsp*/</p>";
@@ -193,6 +199,7 @@ function startGame() {
 
 function nextQuestion() {
   console.log("Starting next question");
+  questionSelected = false;
   if (tempQuestions.length === 0) {
     results();
   } else {
@@ -219,11 +226,14 @@ $(window).on("load", function() {
           .find(".pa")
           .text()
     );
-    checkAnswer($(this));
-    console.log("Getting Ready for Time out");
-    setTimeout(function() {
-      nextQuestion();
-    }, feedbackClock * 1000);
-    console.log("Finished Timeout");
+    if (questionSelected === false) {
+      questionSelected = true;
+      checkAnswer($(this));
+      console.log("Getting Ready for Time out");
+      setTimeout(function() {
+        nextQuestion();
+      }, feedbackClock * 1000);
+      console.log("Finished Timeout");
+    }
   });
 });
